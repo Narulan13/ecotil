@@ -33,7 +33,7 @@ require_once "../db.php";
         <a href="rating.php" class="nav_text_">Рейтинг</a>
         <a href="newspage.php" class="nav_text_">Жаңалықтар</a>
     </div>
-    <div class="right profile_photo sigma">
+    <div class="right profile_photo sigma" >
         <img src="../profile_photo_users/<?php echo $profilePhoto; ?>" class='profile_photo' onclick="window.location.href = '../src/profilepage.php'">
     </div>
     <div class="right mobile-menu"id="bar_sec">
@@ -50,7 +50,7 @@ require_once "../db.php";
 </nav>
     <section class="pr-block">
         <div class="left_s">
-            <img src="../profile_photo_users/<?php echo $profilePhoto; ?>" class='profilePhoto' alt="profile-photo">
+            <img id="pfp" src="../profile_photo_users/<?php echo $profilePhoto; ?>" class='profilePhoto' alt="profile-photo">
         </div>
         <div class="right_s">
             <div class="txt">

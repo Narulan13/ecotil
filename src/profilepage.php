@@ -54,7 +54,7 @@ if (isset($_COOKIE['currentUser'])) {
     
     <section class="pr-block">
         <div class="left_s">
-            <img src="../profile_photo_users/<?php echo $profilePhoto; ?>" class='profilePhoto' alt="profile-photo">
+            <img id="pfp" src="../profile_photo_users/<?php echo $profilePhoto; ?>" class='profilePhoto' alt="profile-photo">
         </div>
         <div class="right_s">
             <div class="txt">

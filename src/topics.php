@@ -58,28 +58,7 @@ if (isset($_COOKIE['currentUser'])) {
                 $topic_res = mysqli_query($conn, "SELECT * FROM topics WHERE id = $topic_id");
                 $topic = mysqli_fetch_assoc($topic_res);
             ?>
-            <canvas id="pdf-canvas" class="canvass"></canvas>
-            <script>
-                const url = '../content/<?php echo $topic['title']?>_конспект.pdf';
-                pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.worker.min.js';
-                pdfjsLib.getDocument(url).promise.then(pdf => {
-                    pdf.getPage(1).then(page => {
-                        const scale = 2;
-                        const viewport = page.getViewport({ scale: 1.25 });
-                        const canvas = document.getElementById('pdf-canvas');
-                        const context = canvas.getContext('2d');
-                        canvas.height = viewport.height;
-                        canvas.width = viewport.width;
-                        const renderContext = {
-                            canvasContext: context,
-                            viewport: viewport
-                        };
-                        page.render(renderContext);
-                    });
-                }).catch(error => {
-                    console.error('Error loading PDF:', error);
-                });
-            </script>
+            <img class="content" src="../content/<?php echo $topic['title']?>_конспект.svg" alt="text">
         </section>
         <section class="practice">
             <div class="left">
@@ -87,18 +66,8 @@ if (isset($_COOKIE['currentUser'])) {
             </div>
             <div class="right">
                 <h2>Өзіңді сынап көр!</h2>
-                <p>Бұл тест арқылы сен өзіңнің <?php echo $topic['title']?> жайлы ақпаратты қаншалықты меңгергеніңді анықтап, өз қателіктеріңді көре аласың!</p>
-                
-                <?php 
-                    $btn = "enabled";
-                    $list_comp = mysqli_query($conn, "SELECT * FROM completed_topics WHERE user_id = $currentUser");
-                    $list = mysqli_fetch_assoc($list_comp);
-                    if($list['topic_id'] == $topic['id']){
-                        $btn = "disabled";
-                    }
-                ?>
-                
-                <a href="tests.php?test_id=<?php echo $topic['id']?>"><button class="btn" <?php echo $btn?>>Бастау</button></a>
+                <p>Бұл тест арқылы сен өзіңнің <?php echo $topic['title']?> жайлы ақпаратты қаншалықты меңгергеніңді анықтап, өз қателіктеріңді көре аласың!</p>              
+                <a href="tests.php?test_id=<?php echo $topic['id']?>"><button class="btn">Бастау</button></a>
             </div>
         </section>
     </div>
