@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap");
 
-/*global*/
 * {
   padding: 0;
   margin: 0;
@@ -554,7 +553,6 @@ footer {
   flex-wrap: wrap;
   margin: 200px 15% 100px;
 }
-/* Mobile version */
 @media (max-width: 768px) {
   .left,
   .right {
@@ -656,10 +654,6 @@ footer {
   }
 
   /* Структура секций и топиков */
-  .topicSEC {
-    margin: 0 5%;
-  }
-
   /* Список рейтинга */
   .rating_sec {
     margin-top: 100px;
@@ -729,35 +723,35 @@ footer {
 }
 
 .mobile-nav {
-  display: none; /* Скрыть мобильное меню по умолчанию */
+  display: none;
   flex-direction: column;
   position: fixed;
-  top: 60px; /* Установите, чтобы меню появлялось под навбаром */
+  top: 60px; 
   right: 0;
-  background-color: #fff; /* Цвет фона мобильного меню */
-  border: 1px solid #ccc; /* Опционально: добавьте границу */
-  width: 200px; /* Ширина мобильного меню */
+  background-color: #fff;
+  border: 1px solid #ccc; 
+  width: 200px;
   z-index: 10;
 }
 
 .mobile-nav a {
   padding: 10px;
   text-decoration: none;
-  display: block; /* Для полного кликабельного блока */
+  display: block; 
 }
 
 .mobile-nav a:hover {
-  background-color: #f0f0f0; /* Цвет фона при наведении */
+  background-color: #f0f0f0; 
 }
 
 @media (max-width: 768px) {
   .nav_text,
   .sigma,
   .logbtn {
-    display: none; /* Скрыть текстовые ссылки на мобильных */
+    display: none;
   }
   .mobile-menu {
-    display: block; /* Показать иконку бургера */
+    display: block;
     align-items: center;
     text-align: center;
   }
@@ -772,14 +766,76 @@ footer {
   display: none;
 }
 
-/* Показываем меню, когда добавлен класс 'open' */
 .mobile-nav.open {
   display: flex;
   flex-direction: column;
 }
-
-/* Высота навбара адаптивная */
 .navbar-custom {
-  height: auto; /* Меню будет автоматически подстраиваться под контент */
-  transition: height 0.3s ease; /* Плавная анимация изменения высоты, если необходимо */
+  height: auto;
+  transition: height 0.3s ease; 
+}
+
+
+.questions, .blocks {
+  display: flex;
+  gap: 20px;
+}
+.container {
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.container .zones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.container .ans {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  gap: 10px;
+}
+.dropzone {
+  width: 200px;
+  height: 50px;
+  border: 2px dashed #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}
+
+.draggable {
+  width: 200px;
+  height: 50px;
+  background-color: #4CAF50;
+  color: white;
+  text-align: center;
+  line-height: 50px;
+  cursor: grab;
+}
+
+.draggable.dragging {
+  opacity: 0.5;
+}
+
+.correct {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.incorrect {
+  background-color: #f44336;
+  color: white;
+}
+
+#testForm {
+  gap: 25px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }

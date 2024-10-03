@@ -1,21 +1,28 @@
 <?php
 require_once "../db.php";
+
 if (isset($_COOKIE['currentUser'])) {
     $currentUser = $_COOKIE['currentUser'];
-    $res = mysqli_query($conn, "SELECT * FROM users WHERE id = $currentUser LIMIT 1");
-    if ($row = mysqli_fetch_assoc($res)) {
+    $stmt = mysqli_prepare($conn, "SELECT * FROM users WHERE id = ? LIMIT 1");
+    mysqli_stmt_bind_param($stmt, "i", $currentUser);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($result)) {
         $profilePhoto = $row['photo'];
         $username = $row['username'];
         $rating = $row['rating'];
         $regDate = $row['reg-date'];
     } else {
         echo "Пользователь не найден";
+        exit();
     }
 } else {
     header("Location: login.php");
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="kk">
 <head>
@@ -52,66 +59,102 @@ if (isset($_COOKIE['currentUser'])) {
     </div>
 </nav>
 
-    <div class="testSEC">
+<div class="testSEC">
     <?php 
-        $test_id = intval($_GET['test_id']);
-        $res = mysqli_query($conn, "SELECT * FROM questions WHERE topic_id = $test_id");
-        $has_questions = false;
+    $test_id = intval($_GET['test_id']);
+    $res = mysqli_query($conn, "SELECT * FROM questions WHERE topic_id = $test_id");
+    if (!$res) {
+        echo "Error in query: " . mysqli_error($conn);
+        exit();
+    }
+    $has_questions = false;
     ?>
-        <form action="submit_test.php?test_id=<?php echo $test_id?>" method="POST">
-            <?php 
-            while($row = mysqli_fetch_assoc($res)){
-                $has_questions = true;
-            ?>
-            <div>
-                <p><?php echo htmlspecialchars($row['question']); ?></p>
-                <?php
-                    $i = 0;
-                    $str = $row['options'];
-                    $arr = explode('/', $str);
-                    while($i < $row['count'] && isset($arr[$i])){
+    <form action="submit_test.php?test_id=<?php echo $test_id?>" method="POST" id="testForm"> 
+        <?php 
+        while ($row = mysqli_fetch_assoc($res)) {
+            $has_questions = true;
+        ?>
+        <div>
+            <p><?php echo htmlspecialchars($row['question']); ?></p>
+            <?php
+            $q = 0;
+            $i = 0;
+            $str = $row['options'];
+            $arr = explode('/', $str);
+
+            if ($row['type'] == 'dragdrop') {
                 ?>
+                <div class="container">
+                <div class="zones">
+                    <?php
+                    
+                    $corr = explode('/', $row['cor_ans']);
+                    foreach ($corr as $answer) {
+                        ?>
+                        <div class="questions">
+                            <div class="dropzone" data-correct="<?php echo htmlspecialchars($answer)?>"></div>
+                        </div>
+                        
+                        <?php
+                    } ?>
+                    </div>
+                    <div class="ans">
+                    <?php
+                    
+                    while ($i < $row['count']) {
+                        ?>
+                        <div class="blocks">
+                            <div class="draggable" draggable="true" data-id="<?php echo $i + 1;?>"><?php echo htmlspecialchars($arr[$i]) ?></div>
+                        </div>
+                        <?php $i++;
+                    } 
+                    ?>
+                </div>
+                </div>
+            <?php 
+            } else {
+                foreach ($arr as $index => $option) { ?>
                     <label>
-                        <input type="<?php echo $row['type']?>" name="answer_<?php echo $row['id']; ?>" value="<?php echo $i+1?>">
-                        <?php echo htmlspecialchars($arr[$i]); ?>
+                        <input type="<?php echo htmlspecialchars($row['type']); ?>"
+                               name="answer_<?php echo $row['id']; ?><?php echo ($row['type'] == 'checkbox') ? '[]' : ''; ?>"
+                               value="<?php echo $index + 1; ?>">
+                        <?php echo htmlspecialchars($option); ?>
                     </label>
                     <br>
                 <?php 
-                    $i++;
-                    } 
-                ?>
-            </div>
-            <hr>
-            <?php } 
-            if($has_questions){ 
-            ?>
-            <div>
-                <button type="submit">Тестті аяқтау</button>
-            </div>
-            <?php } else {
-                echo "<p>Сұрақтар жоқ.</p>";
+                }
             }
             ?>
-        </form>
-    </div>
-
-
-    <footer>
-        <div class="footer-container">
-            <div class="footer--logo">
-                <img src="../img/logo_001.svg" alt="logo">
-            </div>
-            <div class="footer-links">
-                <h3>Байланыстар</h3>
-                <ul>
-                    <li><a href="#">Instagram</a></li>
-                    <li><a href="#">LinkedIn</a></li>
-                    <li><a href="#">GitHub</a></li>
-                    <li><a href="#">Telegram</a></li>
-                </ul>
-            </div>
         </div>
-    </footer>
-    <script src="../js/script.js"></script>
+        <?php 
+        }
+        ?>
+        <div>
+            <?php if ($has_questions) { ?>
+                <button type="submit" id="check" class="btn">Тестті аяқтау</button>
+            <?php } else {
+                echo "<p>Сұрақтар жоқ.</p>";
+            } ?>
+        </div>
+    </form>
+</div>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer--logo">
+            <img src="../img/logo_001.svg" alt="logo">
+        </div>
+        <div class="footer-links">
+            <h3>Байланыстар</h3>
+            <ul>
+                <li><a href="#">Instagram</a></li>
+                <li><a href="#">LinkedIn</a></li>
+                <li><a href="#">GitHub</a></li>
+                <li><a href="#">Telegram</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+<script src="../js/script.js"></script>
 </body>
 </html>
