@@ -92,30 +92,17 @@
     <footer>
         <div class="footer-container">
             <div class="footer--logo">
-                <img src="img/logo_001.svg" alt="logo">
+                <img src="../img/logo_001.svg" alt="logo">
             </div>
             <div class="footer-links">
                 <h3>Байланыстар</h3>
                 <ul>
-                    <li><a href="#">Instagram</a></li>
-                    <li><a href="#">LinkedIn</a></li>
-                    <li><a href="#">GitHub</a></li>
-                    <li><a href="#">Telegram</a></li>
+                    <li><a href="https://www.instagram.com/bnarulan">Instagram</a></li>
+                    <li><a href="https://t.me/bnarulan">Telegram</a></li>
                 </ul>
             </div>
         </div>
     </footer>
     <script src="js/script.js"></script>
-    <script>
-        function toggleMenu() {
-            const mobileNav = document.getElementById('mobileNav');
-            if (mobileNav.style.display === "flex") {
-                mobileNav.style.display = "none";
-            } else {
-                mobileNav.style.display = "flex";
-            }
-        }
-        
-    </script>
 </body>
 </html>

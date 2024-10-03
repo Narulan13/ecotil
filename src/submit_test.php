@@ -117,5 +117,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
 }
 ?>
+<footer>
+    <div class="footer-container">
+        <div class="footer--logo">
+            <img src="../img/logo_001.svg" alt="logo">
+        </div>
+        <div class="footer-links">
+            <h3>Байланыстар</h3>
+            <ul>
+                <li><a href="https://www.instagram.com/bnarulan">Instagram</a></li>
+                <li><a href="https://t.me/bnarulan">Telegram</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
 </body>
 </html>

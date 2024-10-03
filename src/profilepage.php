@@ -76,10 +76,8 @@ if (isset($_COOKIE['currentUser'])) {
             <div class="footer-links">
                 <h3>Байланыстар</h3>
                 <ul>
-                    <li><a href="#">Instagram</a></li>
-                    <li><a href="#">LinkedIn</a></li>
-                    <li><a href="#">GitHub</a></li>
-                    <li><a href="#">Telegram</a></li>
+                    <li><a href="https://www.instagram.com/bnarulan">Instagram</a></li>
+                    <li><a href="https://t.me/bnarulan">Telegram</a></li>
                 </ul>
             </div>
         </div>
