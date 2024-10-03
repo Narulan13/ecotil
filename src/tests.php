@@ -75,7 +75,12 @@ if (isset($_COOKIE['currentUser'])) {
             $has_questions = true;
         ?>
         <div>
-            <p><?php echo htmlspecialchars($row['question']); ?></p>
+            <p><?php echo htmlspecialchars($row['question']); ?></p> <br>
+            <div>
+                <i><p><?php echo htmlspecialchars($row['question-content']); ?></p></i>
+                <b><p><?php echo htmlspecialchars($row['author']) ; ?></p></b>
+            </div>
+            
             <?php
             $q = 0;
             $i = 0;
@@ -112,7 +117,7 @@ if (isset($_COOKIE['currentUser'])) {
                 </div>
                 </div>
             <?php 
-            } else {
+            } else if($row['type'] == 'checkbox' || $row['type'] == 'radio') {
                 foreach ($arr as $index => $option) { ?>
                     <label>
                         <input type="<?php echo htmlspecialchars($row['type']); ?>"
@@ -123,6 +128,16 @@ if (isset($_COOKIE['currentUser'])) {
                     <br>
                 <?php 
                 }
+            }
+            else if($row['type'] == 'audio') {
+                ?>
+                <div class="container_audio">
+                    <audio controls >
+                        <source src="../audio/<?php echo $row['cor_ans']; ?>.aac" type="audio/aac">
+                    </audio>
+                    <input type="text" name="answer_<?php echo $row['id']; ?>" class="input_ans">
+                </div>
+                <?php
             }
             ?>
         </div>

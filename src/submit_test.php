@@ -78,13 +78,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $score++;
                 }
             }
-            
+        } else if ($row['type'] == 'audio'){
+            if (isset($_POST['answer_' . $question_id])) {
+                $user_answer = $_POST['answer_' . $question_id];
+                if ($user_answer == $arr[0]) {
+                    $score++;
+                }
+            }
         }
-
         $total_questions++;
     }
 
     $percentage = ($total_questions > 0) ? ($score / $total_questions) * 100 : 0;
+    $percentage = round($percentage, 2);
     $currentUser = intval($_COOKIE['currentUser']);
     $stmt = $conn->prepare("INSERT INTO completed_topics (user_id, topic_id, score, percentage) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("iiid", $currentUser, $test_id, $score, $percentage);
