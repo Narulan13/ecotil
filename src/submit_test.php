@@ -24,6 +24,7 @@ if (isset($_COOKIE['currentUser'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Тест аяқталды!</title>
+    <link rel="stylesheet" href="../css/style.css">
     <style>
         .btn {
             background-color: #45624e;
@@ -44,6 +45,32 @@ if (isset($_COOKIE['currentUser'])) {
     </style>
 </head>
 <body>
+<nav id="navbar" class="navbar-custom">
+    <div class="logo left">
+        <a href="homepage.php"><img src="../img/logo_001.svg" alt="logo_ecotil"></a>
+    </div>
+    <div class="nav_text">
+        <a href="course.php" class="nav_text_">Курс</a>
+        <a href="rating.php" class="nav_text_">Рейтинг</a>
+        <a href="newspage.php" class="nav_text_">Жаңалықтар</a>
+    </div>
+    <div class="right profile_photo sigma">
+        <img src="../profile_photo_users/<?php echo $profilePhoto; ?>" class='profile_photo' onclick="window.location.href = '../src/profilepage.php'">
+    </div>
+    
+    <div class="right mobile-menu"id="bar_sec">
+        <i id="bar" class="fa-solid fa-bars" onclick="toggleMenu()"></i>
+    </div>
+    <div id="mobileNav" class="mobile-nav">
+        <a href="course.php" class="nav_text_">Курс</a>
+        <a href="rating.php" class="nav_text_">Рейтинг</a>
+        <a href="newspage.php" class="nav_text_">Жаңалықтар</a>
+        <div class="right profile_photo">
+        <img src="../profile_photo_users/<?php echo $profilePhoto; ?>" class='profile_photo' onclick="window.location.href = '../src/profilepage.php'">
+    </div>
+    </div>
+</nav>
+<div class="main test_">
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $test_id = intval($_GET['test_id']);
@@ -117,6 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
 }
 ?>
+</div>
 <footer>
     <div class="footer-container">
         <div class="footer--logo">
