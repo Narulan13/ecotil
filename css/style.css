@@ -28,14 +28,13 @@ body {
 .btn {
   background-color: #45624e;
   border-color: transparent;
-  width: 120px;
-  height: 50px;
   margin-top: 30px;
   border-radius: 20px;
   color: #ffff;
   transition: 300ms;
   font-family: "Comfortaa", "sans-serif";
   cursor: pointer;
+  padding: 15px;
 }
 #linkbtn {
   margin-left: 10px;
@@ -699,8 +698,32 @@ footer {
 }
 
 @media (max-width: 510px){
+  .btn {
+    width: auto;
+    padding: 5px;
+    margin: 0;
+  }
   .content {
     width: 100%;
+  }
+  .topicSEC {
+    margin: 0;
+  }
+  .practice {
+    margin: 10%;
+    padding: 0;
+  }
+  .practice .right {
+    width: 100%;
+    margin: 0;
+    align-items: center;
+    text-align: center;
+  }
+  .practice .left {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    margin: 0;
   }
 }
 .navbar-custom {

@@ -24,7 +24,6 @@ function toggleMenu() {
     const mobileNav = document.getElementById('mobileNav');
     mobileNav.style.display = mobileNav.style.display === "flex" ? "none" : "flex";
 }
-
 const draggables = document.querySelectorAll('.draggable');
 const dropzones = document.querySelectorAll('.dropzone');
 
@@ -37,10 +36,9 @@ draggables.forEach(draggable => {
         draggable.classList.remove('dragging');
     });
 });
-
 dropzones.forEach(dropzone => {
     dropzone.addEventListener('dragover', (e) => {
-        e.preventDefault();
+        e.preventDefault(); 
     });
 
     dropzone.addEventListener('drop', () => {
@@ -54,6 +52,7 @@ dropzones.forEach(dropzone => {
 document.getElementById('check').addEventListener('click', () => {
     let score = 0;
     let totalQuestions = dropzones.length;
+
     dropzones.forEach(dropzone => {
         const draggedItem = dropzone.querySelector('.draggable');
         if (draggedItem) {
@@ -67,6 +66,7 @@ document.getElementById('check').addEventListener('click', () => {
             }
         }
     });
+
     let testForm = document.getElementById('testForm');
     let currentActionUrl = testForm.action;
     if (!currentActionUrl.includes('&score=')) {
@@ -74,8 +74,21 @@ document.getElementById('check').addEventListener('click', () => {
     } else {
         currentActionUrl = currentActionUrl.replace(/&score=\d+/, `&score=${score}`);
     }
-    
+
     testForm.action = currentActionUrl;
     console.log("Form action URL with score: ", currentActionUrl);
     testForm.submit();
 });
+function isMobileDevice() {
+    return window.innerWidth <= 768; 
+}
+if (isMobileDevice()) {
+    draggables.forEach(draggable => {
+        draggable.addEventListener('click', () => {
+            const availableDropzone = Array.from(dropzones).find(dropzone => !dropzone.querySelector('.draggable'));
+            if (availableDropzone && draggable) {
+                availableDropzone.appendChild(draggable); 
+            }
+        });
+    });
+}

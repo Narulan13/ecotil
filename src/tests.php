@@ -88,6 +88,8 @@ if (isset($_COOKIE['currentUser'])) {
             $arr = explode('/', $str);
 
             if ($row['type'] == 'dragdrop') {
+                $corr = explode('/', $row['cor_ans']);
+                $countCorr = count($corr);
                 ?>
                 <div class="container">
                 <div class="zones">
@@ -97,10 +99,10 @@ if (isset($_COOKIE['currentUser'])) {
                     foreach ($corr as $answer) {
                         ?>
                         <div class="questions">
-                            <div class="dropzone" data-correct="<?php echo htmlspecialchars($answer)?>"></div>
+                            <div class="dropzone" data-correct="<?php echo htmlspecialchars($answer)?>" id="<?php echo $countCorr; echo $row['id'] ?>"></div>
                         </div>
-                        
                         <?php
+                        $countCorr--;
                     } ?>
                     </div>
                     <div class="ans">

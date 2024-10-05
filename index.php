@@ -92,7 +92,7 @@
     <footer>
         <div class="footer-container">
             <div class="footer--logo">
-                <img src="../img/logo_001.svg" alt="logo">
+                <img src="img/logo_001.svg" alt="logo">
             </div>
             <div class="footer-links">
                 <h3>Байланыстар</h3>

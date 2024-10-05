@@ -67,7 +67,7 @@ if (isset($_COOKIE['currentUser'])) {
                 ?>
                 <a href="topics.php?topic_id=<?php echo $row['id']?>">
                     <div class="topics">
-                        <p>
+                        <p style="font-family: 'Inter', sans-serif;">
                             <?php
                                 if($row['section_id'] == $section_id){
                                     echo $row['title'];

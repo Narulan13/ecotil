@@ -34,7 +34,7 @@ require_once "../db.php";
         <a href="newspage.php" class="nav_text_">Жаңалықтар</a>
     </div>
     <div class="right profile_photo sigma" >
-        <img src="../profile_photo_users/<?php echo $profilePhoto; ?>" class='profile_photo' onclick="window.location.href = '../src/profilepage.php'">
+        <img src="../profile_photo_users/<?php echo $curRes['photo']; ?>" class='profile_photo' onclick="window.location.href = '../src/profilepage.php'">
     </div>
     <div class="right mobile-menu"id="bar_sec">
         <i id="bar" class="fa-solid fa-bars" onclick="toggleMenu()"></i>
