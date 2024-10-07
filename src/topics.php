@@ -69,12 +69,6 @@ if (isset($_COOKIE['currentUser'])) {
                 <p>Бұл тесттер арқылы сен өзіңнің <?php echo $topic['title']?> жайлы ақпаратты қаншалықты меңгергеніңді анықтап, өз қателіктеріңді көре аласың!</p>              
                 <div style="display: flex; gap: 10px;">
                     <?php 
-                        $btnStatus = 'enabled';
-                        $tests = mysqli_query($conn, "SELECT * FROM completed_topics WHERE topic_id = $topic_id AND user_id = $currentUser");
-                        $has_tests = mysqli_num_rows($tests) > 0;
-                        if ($has_tests) {
-                            $btnStatus = 'disabled';
-                        }
                     ?>
                     <a href="tests.php?test_id=<?php echo $topic['id']?>"><button class="btn" <?php echo $btnStatus?>>Бағаланатын тестті бастау</button></a>
                     <a href="test_without_points.php?test_id=<?php echo $topic['id']?>"><button class="btn">Бағаланбайтын тестті бастау</button></a>
